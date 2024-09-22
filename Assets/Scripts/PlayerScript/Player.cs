@@ -1,0 +1,92 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    public float speed = 5f;
+    private Rigidbody2D rb;
+    public static Vector2 movement;
+    public static int gameScore = 0;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    string[] str;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void Update()
+    {
+        movement.x = Input.GetAxis(nameof(InputStr.Horizontal));
+        movement.y = Input.GetAxis(nameof(InputStr.Vertical));
+        UpdateAnimation();
+        if (movement.x<0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (movement.x>0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+    
+
+    void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + movement * (speed * Time.fixedDeltaTime));
+        
+    }
+
+    void UpdateAnimation()
+    {
+        if (movement.magnitude > 0)
+        {
+            animator.SetBool(nameof(InputStr.isWalking), true);
+            animator.SetFloat(nameof(InputStr.inputX), movement.x);
+            animator.SetFloat(nameof(InputStr.inputY), movement.y);
+           
+        }
+        else
+        { 
+            animator.SetBool(nameof(InputStr.isWalking), false);
+            animator.SetFloat(nameof(InputStr.lastInputX), movement.x);
+            animator.SetFloat(nameof(InputStr.lastInputY), movement.y);
+        }
+    }
+    
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Hider") && HiderMovments.isCaught == false)
+        {
+            GameEvents.HiderFound(); // Call the event
+            gameScore++;
+            Debug.Log("Hider has been found! Player found " + Player.gameScore + " hiders");
+            HiderMovments.isCaught = true;
+            // Change color
+            other.GetComponent<SpriteRenderer>().color = Color.black;
+        }
+
+        if (other.CompareTag("ObjectsToHide"))
+        {
+            Debug.Log("Player has been found!");
+        }
+    }
+
+    enum InputStr
+    {
+        None,
+        Horizontal,
+        Vertical,
+        isWalking,
+        inputX,
+        inputY,
+        lastInputX,
+        lastInputY
+    }
+}
