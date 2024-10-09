@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33386999ba152ec47bd00e7e68846200, type: 3}
+  m_Name: Tree
+  m_EditorClassIdentifier: 
+  objectsToHide: {fileID: 8462768340651381833, guid: cd32dc7aec30a8f44b75cf104b4870fb, type: 3}
+  numberOfSpritesToCreate: 2
+  spawnPoints:
+  - {x: -3.92, y: -2.79, z: 0}
+  - {x: 13.67, y: -4, z: 0}
