@@ -9,5 +9,8 @@ public class HiderList : ScriptableObject
    public GameObject  objectsToHide; 
    public int numberOfSpritesToCreate;
    public Vector3[] spawnPoints;
+   
+   
+   
 }
 

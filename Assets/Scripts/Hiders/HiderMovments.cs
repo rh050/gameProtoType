@@ -41,6 +41,7 @@ public class HiderMovments : MonoBehaviour
     {
         if (other.CompareTag("Player") )
         {
+            GameEvents.HiderFound();
             isCaught = true;
             GetComponent<SpriteRenderer>().color = Color.black;
             StartCoroutine(MoveToPosition( new Vector2(2.7f,-9f)));
