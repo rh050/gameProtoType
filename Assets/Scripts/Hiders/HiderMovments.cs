@@ -6,12 +6,13 @@ public class HiderMovments : MonoBehaviour
 {
     public float speed = 3f;
     public static bool isCaught = false;
+    public Vector2 startingPosition;
     public List<Vector3> hidingSpots; 
+    
 
     void Start()
     {
-        Vector2 playerPosition = new Vector2(Player.movement.x, Player.movement.y);
-        transform.position = playerPosition;
+        transform.position = startingPosition;
         MoveToHidingSpot(0); 
     }
 

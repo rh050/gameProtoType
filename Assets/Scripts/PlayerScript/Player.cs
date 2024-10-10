@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,36 +12,51 @@ public class Player : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     string[] str;
+    private bool canMove = false;
+    public float waitTime = 5;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        StartCoroutine(CountdownEvent(waitTime));
     }
 
     void Update()
     {
         movement.x = Input.GetAxis(nameof(InputStr.Horizontal));
         movement.y = Input.GetAxis(nameof(InputStr.Vertical));
-        UpdateAnimation();
-        if (movement.x<0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (movement.x>0)
-        {
-            spriteRenderer.flipX = false;
-        }
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (canMove)
+        { 
+            UpdateAnimation(); 
+            if (movement.x < 0) 
+            { 
+                spriteRenderer.flipX = true;
+            }
+            else if (movement.x > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+         }
     }
     
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * (speed * Time.fixedDeltaTime));
-        
+        if (canMove)
+        {
+            rb.MovePosition(rb.position + movement * (speed * Time.fixedDeltaTime));
+        }
     }
+    
+    IEnumerator CountdownEvent(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        canMove = true; 
+    }
+ 
 
     void UpdateAnimation()
     {

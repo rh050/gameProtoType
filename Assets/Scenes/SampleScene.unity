@@ -2365,7 +2365,7 @@ Transform:
   m_GameObject: {fileID: 439283147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.65, y: -9.15, z: -10}
+  m_LocalPosition: {x: 2.63, y: -9.15, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2406,6 +2406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  waitTime: 5
 --- !u!58 &572775211
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2550,7 +2551,7 @@ Transform:
   m_GameObject: {fileID: 572775209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.95, y: -10.78, z: 0}
+  m_LocalPosition: {x: -6.13, y: -9.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2812,13 +2813,21 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hider
       objectReference: {fileID: 0}
+    - target: {fileID: 2986931405233808331, guid: 4fb36fd0b4830e4469e3e772fbb08634, type: 3}
+      propertyPath: startingPosition.x
+      value: -2.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986931405233808331, guid: 4fb36fd0b4830e4469e3e772fbb08634, type: 3}
+      propertyPath: startingPosition.y
+      value: -9.29
+      objectReference: {fileID: 0}
     - target: {fileID: 5554517248836366952, guid: 4fb36fd0b4830e4469e3e772fbb08634, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.7
+      value: -2.63
       objectReference: {fileID: 0}
     - target: {fileID: 5554517248836366952, guid: 4fb36fd0b4830e4469e3e772fbb08634, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.09
+      value: -9.29
       objectReference: {fileID: 0}
     - target: {fileID: 5554517248836366952, guid: 4fb36fd0b4830e4469e3e772fbb08634, type: 3}
       propertyPath: m_LocalPosition.z
