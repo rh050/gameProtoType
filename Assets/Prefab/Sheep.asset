@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Sheep
   m_EditorClassIdentifier: 
   objectsToHide: {fileID: 8462768340651381833, guid: 695bca528a65fa64b84a1682d4d03b8d, type: 3}
-  numberOfSpritesToCreate: 2
   spawnPoints:
-  - {x: 14.01, y: -4.04, z: 0}
-  - {x: 14.01, y: -4.04, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  numberOfSpritesToCreate: 2
+  numberOfSpawnPointsToCreate: 3
