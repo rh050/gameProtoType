@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hider
   - ObjectsToHide
+  - StagePlayer
   layers:
   - Default
   - TransparentFX
