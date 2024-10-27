@@ -24,34 +24,46 @@ public class Spawner : MonoBehaviour
         {
             for (int i = 0; i < spawnManager.numberOfSpritesToCreate; i++)
             {
-                GameObject newObject = Instantiate(spawnManager.objectsToHide, hidingSpots[i % hidingSpots.Count], Quaternion.identity);
+                Vector3 spawnPosition = hidingSpots[i % hidingSpots.Count];
+                GameObject newObject = Instantiate(spawnManager.objectsToHide, spawnPosition, Quaternion.identity);
                 newObject.name = spawnManager.objectsToHide.name + instanceNumber;
                 instanceNumber++;
             }
         }
     }
 
-    // Generate random valid spawn points on the tilemap
+    // Generate unique random spawn points on the tilemap
     List<Vector3> GenerateSpawnPointsOnTilemap(int numberOfPoints)
     {
         List<Vector3> spawnPoints = new List<Vector3>();
-        BoundsInt bounds = targetTilemap.cellBounds;
+        HashSet<Vector3> usedPositions = new HashSet<Vector3>(); 
 
         int pointsCreated = 0;
         while (pointsCreated < numberOfPoints)
         {
-            int x = Random.Range(bounds.xMin, bounds.xMax);
-            int y = Random.Range(bounds.yMin, bounds.yMax);
-            Vector3Int cellPosition = new Vector3Int(x, y, 0);
+            Vector3Int cellPosition = GetRandomCellPosition(); 
 
-            if (targetTilemap.HasTile(cellPosition)) // Check if the tilemap has a tile at this position
+            if (targetTilemap.HasTile(cellPosition))
             {
-                Vector3 worldPosition = targetTilemap.CellToWorld(cellPosition) + targetTilemap.cellSize / 2;
-                spawnPoints.Add(worldPosition);
-                pointsCreated++;
+                Vector3 worldPosition = targetTilemap.GetCellCenterWorld(cellPosition); 
+
+                if (!usedPositions.Contains(worldPosition))
+                {
+                    spawnPoints.Add(worldPosition);
+                    usedPositions.Add(worldPosition); 
+                    pointsCreated++;
+                }
             }
         }
 
         return spawnPoints;
+    }
+
+    Vector3Int GetRandomCellPosition()
+    {
+        BoundsInt bounds = targetTilemap.cellBounds;
+        int x = Random.Range(bounds.xMin, bounds.xMax);
+        int y = Random.Range(bounds.yMin, bounds.yMax);
+        return new Vector3Int(x, y, 0);
     }
 }

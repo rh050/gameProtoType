@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Iland
   m_EditorClassIdentifier: 
   objectsToHide: {fileID: 3836665830091074981, guid: 10349e121c49d2f43b51ad65b1258fa6, type: 3}
-  spawnPoints:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
   numberOfSpritesToCreate: 2
-  numberOfSpawnPointsToCreate: 1
+  spawnPoints:
+  - {x: 24.91, y: -10.38, z: 0}
+  - {x: 14.98, y: -18.04, z: 0}

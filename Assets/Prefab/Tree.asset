@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Tree
   m_EditorClassIdentifier: 
   objectsToHide: {fileID: 8462768340651381833, guid: cd32dc7aec30a8f44b75cf104b4870fb, type: 3}
-  spawnPoints:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
   numberOfSpritesToCreate: 2
-  numberOfSpawnPointsToCreate: 2
+  spawnPoints:
+  - {x: -3.92, y: -2.79, z: 0}
+  - {x: 13.67, y: -4, z: 0}

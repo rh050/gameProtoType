@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Box
   m_EditorClassIdentifier: 
   objectsToHide: {fileID: 8462768340651381833, guid: 16df7c4ff486e574b80c847fd2d9ef37, type: 3}
-  spawnPoints:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
   numberOfSpritesToCreate: 1
-  numberOfSpawnPointsToCreate: 3
+  spawnPoints:
+  - {x: 16.55, y: -12.62, z: 0}

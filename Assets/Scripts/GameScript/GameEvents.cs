@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameEvents : MonoBehaviour
 {
     public static event Action OnHiderFound;
+    public static event Action OnHiderWon;
 
     public static void HiderFound()
     {
@@ -11,5 +12,10 @@ public class GameEvents : MonoBehaviour
             OnHiderFound.Invoke();
         
     }
-    
+
+    public static void HiderWon()
+    {   
+        if (OnHiderWon != null)
+            OnHiderWon.Invoke();
+    }
 }

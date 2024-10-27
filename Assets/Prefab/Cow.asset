@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Cow
   m_EditorClassIdentifier: 
   objectsToHide: {fileID: 8462768340651381833, guid: 4c19df9fc4f95c3439797e2671d928a4, type: 3}
-  spawnPoints:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
   numberOfSpritesToCreate: 1
-  numberOfSpawnPointsToCreate: 3
+  spawnPoints:
+  - {x: 0.89, y: -17.37, z: 0}

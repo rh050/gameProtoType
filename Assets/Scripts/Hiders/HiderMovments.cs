@@ -19,11 +19,21 @@ public class HiderMovments : MonoBehaviour
     private float distancePlayerToStagePlayer;
     private bool goingToHideout = true;
     private bool goingToStagePlayer = false;
+    private GameObject[] hidingSpotsEr;
+    private List<Vector2> availableHidingSpots = new List<Vector2>();
+
 
     void Start()
     {
         transform.position = startingPosition + new Vector2(0, -0.5f);
         StartMoveToHidingSpot(0); 
+        
+        // Find and store all hiding spots at the start
+        GameObject[] hidingSpotsEr = GameObject.FindGameObjectsWithTag("ObjectsToHide");
+        foreach (GameObject hideSpot in hidingSpotsEr)
+        {
+            availableHidingSpots.Add(hideSpot.transform.position);
+        }
     }
 
     void Update()
@@ -44,7 +54,10 @@ public class HiderMovments : MonoBehaviour
     void StartMoveToHidingSpot(int index)
     {
         goingToHideout = true; // semaphore
-        GameObject[] hidingSpotsEr = GameObject.FindGameObjectsWithTag("ObjectsToHide");
+        while (hidingSpotsEr==null)
+        {
+            hidingSpotsEr = GameObject.FindGameObjectsWithTag("ObjectsToHide");
+        }
         foreach (GameObject hideSpot in hidingSpotsEr)
         {
             hidingSpots.Add(hideSpot.transform.position);
@@ -90,7 +103,6 @@ public class HiderMovments : MonoBehaviour
                 {
                     StopCoroutine(currentCoroutine);
                 }
-                Debug.Log("Hider is going to stage player");
                 currentCoroutine = StartCoroutine(MoveToPosition(StagePlayer.position));
             }
             goingToStagePlayer = false;
@@ -135,20 +147,38 @@ public class HiderMovments : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameEvents.HiderFound(); 
             isCaught = true;
-            GetComponent<SpriteRenderer>().color = Color.black; 
-
-            if (currentCoroutine != null)
+            if (isCaught)
             {
-                StopCoroutine(currentCoroutine); 
+                gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                ++Player.hiderStopPlay;
+                GetComponent<SpriteRenderer>().color = Color.black;
+                Debug.Log("Hider caught!");
+                //go to the stage player
+                if (currentCoroutine != null)
+                {
+                    StopCoroutine(currentCoroutine);
+                }
+                //move to starting position
+                currentCoroutine = StartCoroutine(MoveToPosition(startingPosition));
+                GameEvents.HiderFound();
             }
-            StartCoroutine(MoveToPosition(StagePlayer.position)); 
-            Debug.Log("Hider caught!");
         }
         if (other.CompareTag("StagePlayer"))
         {
-            Destroy(gameObject);
+            if (!isCaught)
+            {
+                gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                ++Player.hiderStopPlay;
+                isCaught = true;
+                if (currentCoroutine != null)
+                {
+                    StopCoroutine(currentCoroutine);
+                }
+                currentCoroutine = StartCoroutine(MoveToPosition(StagePlayer.position));
+                GameEvents.HiderWon();
+            }
+
         }
     }
 }

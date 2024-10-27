@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     public static Vector2 movement;
     public static int gameScore = 0;
+    public static int hiderStopPlay = 0;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     string[] str;
@@ -76,23 +77,6 @@ public class Player : MonoBehaviour
     }
     
     
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Hider") && HiderMovments.isCaught == false)
-        {
-            GameEvents.HiderFound(); // Call the event
-            gameScore++;
-            Debug.Log("Hider has been found! Player found " + Player.gameScore + " hiders");
-            HiderMovments.isCaught = true;
-            // Change color
-            other.GetComponent<SpriteRenderer>().color = Color.black;
-        }
-
-        if (other.CompareTag("ObjectsToHide"))
-        {
-            Debug.Log("Player has been found!");
-        }
-    }
 
     enum InputStr
     {
